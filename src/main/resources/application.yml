@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active: local
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    open-in-view: false
+
+server:
+  port: 8081
