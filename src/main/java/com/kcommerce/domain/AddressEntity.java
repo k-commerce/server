@@ -5,15 +5,16 @@ import lombok.Getter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "orders")
+@Table(name = "address")
 @Getter
-public class Order extends BaseTimeEntity {
+public class AddressEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member;
+    private String name;
+
+    @Embedded
+    private Address address;
 }

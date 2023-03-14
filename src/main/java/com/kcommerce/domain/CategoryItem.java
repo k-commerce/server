@@ -5,15 +5,18 @@ import lombok.Getter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "orders")
 @Getter
-public class Order extends BaseTimeEntity {
+public class CategoryItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member;
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "item_id")
+    private Item item;
 }
