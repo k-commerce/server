@@ -1,10 +1,13 @@
 package com.kcommerce.domain;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter
 public class Category {
 
     @Id
@@ -19,5 +22,5 @@ public class Category {
     private Category parent;
 
     @OneToMany(mappedBy = "parent")
-    private final List<Category> categoryList = new ArrayList<>();
+    private List<Category> childList = new ArrayList<>();
 }

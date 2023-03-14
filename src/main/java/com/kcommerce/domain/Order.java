@@ -1,9 +1,12 @@
 package com.kcommerce.domain;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "orders")
+@Getter
 public class Order extends BaseTimeEntity {
 
     @Id

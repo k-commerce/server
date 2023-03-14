@@ -1,8 +1,11 @@
 package com.kcommerce.domain;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 
 @Entity
+@Getter
 public class CategoryItem {
 
     @Id
