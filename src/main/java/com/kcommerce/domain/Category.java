@@ -1,6 +1,9 @@
 package com.kcommerce.domain;
 
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -8,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Category {
 
     @Id
@@ -23,4 +27,11 @@ public class Category {
 
     @OneToMany(mappedBy = "parent")
     private List<Category> childList = new ArrayList<>();
+
+    @Builder
+    public Category(String name, int depth, Category parent) {
+        this.name = name;
+        this.depth = depth;
+        this.parent = parent;
+    }
 }
