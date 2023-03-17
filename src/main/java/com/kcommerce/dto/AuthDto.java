@@ -4,6 +4,7 @@ import com.kcommerce.domain.Member;
 import lombok.Builder;
 import lombok.Getter;
 
+import javax.validation.constraints.Pattern;
 import java.util.Collections;
 
 public class AuthDto {
@@ -21,7 +22,10 @@ public class AuthDto {
     @Getter
     public static class Request {
 
+        @Pattern(regexp = "^[a-z]{1,9}$", message = "")
         private String username;
+
+        @Pattern(regexp = "^[a-zA-Z0-9]{1,9}$", message = "")
         private String password;
     }
 
