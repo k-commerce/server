@@ -12,6 +12,7 @@ public class ItemMapper {
 
     public ItemDto.Response toDto(Item item) {
         return new ItemDto.Response(
+                item.getId(),
                 item.getName(),
                 item.getPrice(),
                 item.getDescription()
