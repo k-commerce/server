@@ -2,6 +2,8 @@ package com.kcommerce.service;
 
 import com.kcommerce.domain.Member;
 import com.kcommerce.dto.MemberDto;
+import com.kcommerce.error.exception.BusinessException;
+import com.kcommerce.error.exception.ErrorCode;
 import com.kcommerce.mapper.MemberMapper;
 import com.kcommerce.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +34,7 @@ public class MemberService {
     private void validateDuplicate(String username) {
         memberRepository.findByUsername(username)
                 .ifPresent(member -> {
-                    // TODO
+                    throw new BusinessException(ErrorCode.USERNAME_DUPLICATE);
                 });
     }
 }

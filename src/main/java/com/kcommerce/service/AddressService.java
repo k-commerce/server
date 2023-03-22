@@ -4,6 +4,8 @@ import com.kcommerce.domain.Address;
 import com.kcommerce.domain.AddressEntity;
 import com.kcommerce.domain.Member;
 import com.kcommerce.dto.AddressDto;
+import com.kcommerce.error.exception.BusinessException;
+import com.kcommerce.error.exception.ErrorCode;
 import com.kcommerce.mapper.AddressMapper;
 import com.kcommerce.repository.AddressRepository;
 import com.kcommerce.repository.MemberRepository;
@@ -38,9 +40,7 @@ public class AddressService {
     public void updateAddress(Long id, AddressDto addressDto, Long memberId) {
         Member member = memberRepository.getReferenceById(memberId);
         AddressEntity addressEntity = addressRepository.findByIdAndMember(id, member)
-                .orElseThrow(
-                        // TODO
-                );
+                .orElseThrow(() -> new BusinessException(ErrorCode.ADDRESS_NOT_FOUND));
         Address address = addressMapper.toVo(addressDto);
         addressEntity.update(addressDto.getName(), address);
     }
@@ -49,7 +49,7 @@ public class AddressService {
         Member member = memberRepository.getReferenceById(memberId);
         int result = addressRepository.deleteByIdAndMember(id, member);
         if (result == 0) {
-            // TODO
+            throw new BusinessException(ErrorCode.ADDRESS_NOT_FOUND);
         }
     }
 }
