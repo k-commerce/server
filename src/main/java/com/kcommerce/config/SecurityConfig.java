@@ -30,7 +30,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeRequests()
                 .mvcMatchers(HttpMethod.POST, "/api/members", "/api/auth").permitAll()
-                .mvcMatchers(HttpMethod.GET, "/api/categories").permitAll()
+                .mvcMatchers(HttpMethod.GET, "/api/categories", "/api/items/**").permitAll()
                 .antMatchers("/api/**").authenticated()
 
                 .and()
