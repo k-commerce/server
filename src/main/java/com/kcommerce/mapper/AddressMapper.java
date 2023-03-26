@@ -4,43 +4,27 @@ import com.kcommerce.domain.Address;
 import com.kcommerce.domain.AddressEntity;
 import com.kcommerce.domain.Member;
 import com.kcommerce.dto.AddressDto;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-@Component
-public class AddressMapper {
+@Mapper(componentModel = "spring")
+public interface AddressMapper {
 
-    public AddressEntity toEntity(AddressDto addressDto, Member member) {
-        return AddressEntity.builder()
-                .member(member)
-                .name(addressDto.getName())
-                .address(toVo(addressDto))
-                .build();
-    }
+    @Mapping(target = "member", source = "member")
+    @Mapping(target = "name", source = "addressDto.name")
+    @Mapping(target = "address.postcode", source = "addressDto.postcode")
+    @Mapping(target = "address.selected", source = "addressDto.selected")
+    @Mapping(target = "address.detailed", source = "addressDto.detailed")
+    AddressEntity toEntity(AddressDto addressDto, Member member);
 
-    public List<AddressDto> toDtoList(List<AddressEntity> addressEntityList) {
-        return addressEntityList.stream()
-                .map(this::toDto)
-                .collect(Collectors.toList());
-    }
+    List<AddressDto> toDtoList(List<AddressEntity> addressEntityList);
 
-    public AddressDto toDto(AddressEntity addressEntity) {
-        return AddressDto.builder()
-                .id(addressEntity.getId())
-                .name(addressEntity.getName())
-                .postcode(addressEntity.getAddress().getPostcode())
-                .selected(addressEntity.getAddress().getSelected())
-                .detailed(addressEntity.getAddress().getDetailed())
-                .build();
-    }
+    @Mapping(target = "postcode", source = "address.postcode")
+    @Mapping(target = "selected", source = "address.selected")
+    @Mapping(target = "detailed", source = "address.detailed")
+    AddressDto toDto(AddressEntity addressEntity);
 
-    public Address toVo(AddressDto addressDto) {
-        return Address.builder()
-                .postcode(addressDto.getPostcode())
-                .selected(addressDto.getSelected())
-                .detailed(addressDto.getDetailed())
-                .build();
-    }
+    Address toVo(AddressDto addressDto);
 }
