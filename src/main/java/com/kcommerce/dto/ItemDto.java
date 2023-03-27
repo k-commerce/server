@@ -2,6 +2,9 @@ package com.kcommerce.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 public class ItemDto {
 
@@ -12,5 +15,13 @@ public class ItemDto {
         private String name;
         private int price;
         private String description;
+    }
+
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class ItemSearchCondition {
+        private Long categoryId;
+        private List<Long> itemIdList;
     }
 }
