@@ -2,15 +2,16 @@ package com.kcommerce.dto;
 
 import com.kcommerce.domain.OrderStatus;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 public class OrderItemDto {
 
     @Getter
-    @Builder
-    @NoArgsConstructor
+    public static class Request {
+        private Long orderItemId;
+    }
+
+    @Getter
     @AllArgsConstructor
     public static class Response {
         private Long id;
