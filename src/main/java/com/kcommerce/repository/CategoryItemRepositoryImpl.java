@@ -1,7 +1,7 @@
 package com.kcommerce.repository;
 
 import com.kcommerce.domain.Item;
-import com.kcommerce.dto.ItemSearchCondition;
+import com.kcommerce.dto.ItemDto;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ public class CategoryItemRepositoryImpl implements CategoryItemRepositoryCustom 
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<Item> searchItem(ItemSearchCondition itemSearchCondition) {
+    public List<Item> searchItem(ItemDto.ItemSearchCondition itemSearchCondition) {
         return queryFactory
                 .select(categoryItem.item)
                 .from(categoryItem)

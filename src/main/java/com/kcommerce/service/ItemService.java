@@ -2,7 +2,6 @@ package com.kcommerce.service;
 
 import com.kcommerce.domain.Item;
 import com.kcommerce.dto.ItemDto;
-import com.kcommerce.dto.ItemSearchCondition;
 import com.kcommerce.mapper.ItemMapper;
 import com.kcommerce.repository.CategoryItemRepository;
 import com.kcommerce.repository.ItemRepository;
@@ -21,7 +20,7 @@ public class ItemService {
     private final ItemRepository itemRepository;
     private final ItemMapper itemMapper;
 
-    public List<ItemDto.Response> getItemList(ItemSearchCondition itemSearchCondition) {
+    public List<ItemDto.Response> getItemList(ItemDto.ItemSearchCondition itemSearchCondition) {
         List<Item> itemList = categoryItemRepository.searchItem(itemSearchCondition);
         return itemMapper.toDtoList(itemList);
     }

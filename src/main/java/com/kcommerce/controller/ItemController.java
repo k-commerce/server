@@ -1,7 +1,6 @@
 package com.kcommerce.controller;
 
 import com.kcommerce.dto.ItemDto;
-import com.kcommerce.dto.ItemSearchCondition;
 import com.kcommerce.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +19,7 @@ public class ItemController {
 
     @GetMapping("/api/items")
     public ResponseEntity<List<ItemDto.Response>> getItemList(@RequestParam(required = false) Long categoryId, @RequestParam(required = false) List<Long> itemIds) {
-        ItemSearchCondition itemSearchCondition = new ItemSearchCondition(categoryId, itemIds);
+        ItemDto.ItemSearchCondition itemSearchCondition = new ItemDto.ItemSearchCondition(categoryId, itemIds);
         return ResponseEntity.ok(itemService.getItemList(itemSearchCondition));
     }
 

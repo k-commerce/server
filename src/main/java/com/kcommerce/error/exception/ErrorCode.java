@@ -17,6 +17,9 @@ public enum ErrorCode {
     // Address
     ADDRESS_NOT_FOUND(404, "ADDRESS_NOT_FOUND", "배송지를 찾을 수 없습니다."),
 
+    // Order
+    ALREADY_CANCEL(400, "ALREADY_CANCEL", "이미 취소된 주문입니다."),
+
     ;
     private final int status;
     private final String code;
