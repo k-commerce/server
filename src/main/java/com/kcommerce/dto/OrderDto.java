@@ -2,10 +2,7 @@ package com.kcommerce.dto;
 
 import com.kcommerce.domain.Address;
 import com.kcommerce.domain.PaymentType;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -16,10 +13,16 @@ import java.util.List;
 public class OrderDto {
 
     @Getter
-    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class Request {
+
         private PaymentType payment;
+
+        @Pattern(regexp = "^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]{1,9}$", message = "이름은 1~9자의 영문, 숫자, 한글만 사용 가능합니다.")
         private String name;
+
+        @Pattern(regexp = "^[0-9]{11}$", message = "휴대전화번호는 11자의 숫자만 사용 가능합니다.")
         private String phoneNumber;
 
         @Pattern(regexp = "^[0-9]{5}$", message = "우편번호는 5자의 숫자로 입력해 주세요.")
@@ -33,13 +36,13 @@ public class OrderDto {
         private String detailed;
 
         private List<Long> itemIdList;
+
         private List<Integer> countList;
+
         private List<Integer> totalPriceList;
     }
 
     @Getter
-    @Setter
-    @NoArgsConstructor
     @AllArgsConstructor
     public static class Response {
         private Long id;

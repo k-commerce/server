@@ -2,27 +2,14 @@ package com.kcommerce.mapper;
 
 import com.kcommerce.domain.Item;
 import com.kcommerce.dto.ItemDto;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-@Component
-public class ItemMapper {
+@Mapper(componentModel = "spring")
+public interface ItemMapper {
 
-    public ItemDto.Response toDto(Item item) {
-        return new ItemDto.Response(
-                item.getId(),
-                item.getName(),
-                item.getPrice(),
-                item.getDescription()
-        );
-    }
+    ItemDto.Response toDto(Item item);
 
-    public List<ItemDto.Response> toDtoList(List<Item> itemList) {
-        return itemList
-                .stream()
-                .map(this::toDto)
-                .collect(Collectors.toList());
-    }
+    List<ItemDto.Response> toDtoList(List<Item> itemList);
 }

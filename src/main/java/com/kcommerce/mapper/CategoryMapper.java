@@ -2,15 +2,15 @@ package com.kcommerce.mapper;
 
 import com.kcommerce.domain.Category;
 import com.kcommerce.dto.CategoryDto;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
-public class CategoryMapper {
+@Mapper(componentModel = "spring")
+public interface CategoryMapper {
 
-    public CategoryDto.Response toDto(Category category) {
+    default CategoryDto.Response toDto(Category category) {
         return new CategoryDto.Response(
                 category.getId(),
                 category.getName(),
@@ -22,10 +22,5 @@ public class CategoryMapper {
         );
     }
 
-    public List<CategoryDto.Response> toDtoList(List<Category> categoryList) {
-        return categoryList
-                .stream()
-                .map(this::toDto)
-                .collect(Collectors.toList());
-    }
+    List<CategoryDto.Response> toDtoList(List<Category> categoryList);
 }

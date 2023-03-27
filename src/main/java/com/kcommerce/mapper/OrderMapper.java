@@ -1,44 +1,20 @@
 package com.kcommerce.mapper;
 
-import com.kcommerce.domain.Address;
 import com.kcommerce.domain.Member;
 import com.kcommerce.domain.Order;
 import com.kcommerce.dto.OrderDto;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
-@Component
-@RequiredArgsConstructor
-public class OrderMapper {
+@Mapper(componentModel = "spring")
+public interface OrderMapper {
 
-    private final AddressMapper addressMapper;
+    @Mapping(target = "name", source = "orderDto.name")
+    @Mapping(target = "phoneNumber", source = "orderDto.phoneNumber")
+    @Mapping(target = "address.postcode", source = "orderDto.postcode")
+    @Mapping(target = "address.selected", source = "orderDto.selected")
+    @Mapping(target = "address.detailed", source = "orderDto.detailed")
+    Order toEntity(Member member, OrderDto.Request orderDto);
 
-    public Order toEntity(Member member, OrderDto.Request orderDto) {
-        return Order.builder()
-                .member(member)
-                .address(toVo(orderDto))
-                .payment(orderDto.getPayment())
-                .name(orderDto.getName())
-                .phoneNumber(orderDto.getPhoneNumber())
-                .build();
-    }
-
-    public OrderDto.Response toDto(Order order) {
-        return new OrderDto.Response(
-                order.getId(),
-                order.getPayment(),
-                order.getCreatedDate(),
-                order.getName(),
-                order.getPhoneNumber(),
-                order.getAddress()
-        );
-    }
-
-    public Address toVo(OrderDto.Request orderDto) {
-        return Address.builder()
-                .postcode(orderDto.getPostcode())
-                .selected(orderDto.getSelected())
-                .detailed(orderDto.getDetailed())
-                .build();
-    }
+    OrderDto.Response toDto(Order order);
 }

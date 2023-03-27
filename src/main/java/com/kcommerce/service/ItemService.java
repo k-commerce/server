@@ -2,6 +2,8 @@ package com.kcommerce.service;
 
 import com.kcommerce.domain.Item;
 import com.kcommerce.dto.ItemDto;
+import com.kcommerce.error.exception.BusinessException;
+import com.kcommerce.error.exception.ErrorCode;
 import com.kcommerce.mapper.ItemMapper;
 import com.kcommerce.repository.CategoryItemRepository;
 import com.kcommerce.repository.ItemRepository;
@@ -22,11 +24,15 @@ public class ItemService {
 
     public List<ItemDto.Response> getItemList(ItemDto.ItemSearchCondition itemSearchCondition) {
         List<Item> itemList = categoryItemRepository.searchItem(itemSearchCondition);
+        if (itemList.isEmpty()) {
+            throw new BusinessException(ErrorCode.ITEM_NOT_FOUND);
+        }
         return itemMapper.toDtoList(itemList);
     }
 
     public ItemDto.Response getItem(Long itemId) {
-        Item item = itemRepository.findById(itemId).orElseThrow();
+        Item item = itemRepository.findById(itemId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.ITEM_NOT_FOUND));
         return itemMapper.toDto(item);
     }
 }

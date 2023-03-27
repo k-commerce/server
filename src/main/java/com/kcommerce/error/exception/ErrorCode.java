@@ -19,6 +19,12 @@ public enum ErrorCode {
 
     // Order
     ALREADY_CANCEL(400, "ALREADY_CANCEL", "이미 취소된 주문입니다."),
+    CHECK_MEMBER(400, "CHECK_MEMBER", "로그인된 회원과 주문자가 일치하지 않습니다."),
+    ORDER_ITEM_NOT_FOUND(404, "ORDER_ITEM_NOT_FOUND", "주문한 상품을 찾을 수 없습니다."),
+    ORDER_NOT_FOUND(404, "ORDER_NOT_FOUND", "주문을 찾을 수 없습니다."),
+
+    // Item
+    ITEM_NOT_FOUND(404, "ITEM_NOT_FOUND", "상품을 찾을 수 없습니다."),
 
     ;
     private final int status;
