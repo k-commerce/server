@@ -20,6 +20,9 @@ public enum ErrorCode {
     // Order
     ALREADY_CANCEL(400, "ALREADY_CANCEL", "이미 취소된 주문입니다."),
 
+    // Item
+    ITEM_NOT_FOUND(400, "ITEM_NOT_FOUND", "상품을 찾을 수 없습니다."),
+
     ;
     private final int status;
     private final String code;
