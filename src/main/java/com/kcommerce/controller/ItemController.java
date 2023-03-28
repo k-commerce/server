@@ -18,8 +18,8 @@ public class ItemController {
     private final ItemService itemService;
 
     @GetMapping("/api/items")
-    public ResponseEntity<List<ItemDto.Response>> getItemList(@RequestParam(required = false) Long categoryId, @RequestParam(required = false) List<Long> itemIds) {
-        ItemDto.ItemSearchCondition itemSearchCondition = new ItemDto.ItemSearchCondition(categoryId, itemIds);
+    public ResponseEntity<List<ItemDto.Response>> getItemList(@RequestParam(required = false) Long categoryId, @RequestParam(required = false) List<Long> itemIdList) {
+        ItemDto.ItemSearchCondition itemSearchCondition = new ItemDto.ItemSearchCondition(categoryId, itemIdList);
         return ResponseEntity.ok(itemService.getItemList(itemSearchCondition));
     }
 
