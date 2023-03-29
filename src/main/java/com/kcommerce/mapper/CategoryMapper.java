@@ -10,12 +10,12 @@ import java.util.List;
 public interface CategoryMapper {
 
     default CategoryDto.Response toDto(Category category) {
-        return new CategoryDto.Response(
-                category.getId(),
-                category.getName(),
-                category.getDepth(),
-                category.getParent() != null ? category.getParent().getId() : null
-        );
+        return CategoryDto.Response.builder()
+                .id(category.getId())
+                .name(category.getName())
+                .depth(category.getDepth())
+                .parentId(category.getParent() != null ? category.getParent().getId() : null)
+                .build();
     }
 
     List<CategoryDto.Response> toDtoList(List<Category> categoryList);

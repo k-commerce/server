@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -24,9 +22,6 @@ public class Category {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
     private Category parent;
-
-    @OneToMany(mappedBy = "parent")
-    private List<Category> childList = new ArrayList<>();
 
     @Builder
     public Category(String name, int depth, Category parent) {

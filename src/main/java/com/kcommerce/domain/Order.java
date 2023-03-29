@@ -21,14 +21,14 @@ public class Order extends BaseTimeEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    private String name;
+    private String phoneNumber;
+
     @Embedded
     private Address address;
 
     @Enumerated(EnumType.STRING)
     private PaymentType payment;
-
-    private String name;
-    private String phoneNumber;
 
     @Builder
     public Order(Member member, Address address, PaymentType payment, String name, String phoneNumber) {

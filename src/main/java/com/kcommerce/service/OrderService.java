@@ -37,8 +37,8 @@ public class OrderService {
     public void createOrder(OrderDto.Request orderDto, Long memberId) {
         Member member = memberRepository.getReferenceById(memberId);
         List<Long> itemIdList = new ArrayList<>();
-        for (ItemDto.OrderCheckedItemRequest item : orderDto.getOrderItemList()) {
-            itemIdList.add(item.getId());
+        for (OrderDto.OrderCheck item : orderDto.getOrderItemList()) {
+            itemIdList.add(item.getItemId());
         }
         List<Item> itemList = itemRepository.findByIdIn(itemIdList);
         Order order = orderRepository.save(orderMapper.toEntity(member, orderDto));
@@ -62,7 +62,7 @@ public class OrderService {
         List<OrderItem> orderItemList = orderItemRepository.findOrderItemByMember(member);
         return orderItemList
                 .stream()
-                .map(orderItem ->  {
+                .map(orderItem -> {
                     OrderDto.Response orderDto = orderMapper.toDto(orderItem.getOrder());
                     ItemDto.Response itemDto = itemMapper.toDto(orderItem.getItem());
                     return orderItemMapper.toDto(orderItem, orderDto, itemDto);

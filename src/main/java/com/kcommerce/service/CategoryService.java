@@ -19,7 +19,7 @@ public class CategoryService {
     private final CategoryMapper categoryMapper;
 
     public List<CategoryDto.Response> getCategoryList() {
-        List<Category> categories = categoryRepository.findAll();
-        return categoryMapper.toDtoList(categories);
+        List<Category> categoryList = categoryRepository.findAll();
+        return categoryMapper.toDtoList(categoryList);
     }
 }
