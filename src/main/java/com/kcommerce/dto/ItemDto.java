@@ -1,16 +1,18 @@
 package com.kcommerce.dto;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.List;
 
 public class ItemDto {
 
     @Getter
-    @AllArgsConstructor
+    @Builder
     public static class Response {
+
         private Long id;
         private String name;
         private int price;
@@ -18,19 +20,10 @@ public class ItemDto {
     }
 
     @Getter
-    @AllArgsConstructor
-    public static class OrderCheckedItemRequest {
-        private Long id;
-        private String name;
-        private int price;
-        private String description;
-        private int quantity;
-    }
-
-    @Getter
-    @NoArgsConstructor
-    @AllArgsConstructor
+    @Setter
+    @ToString
     public static class ItemSearchCondition {
+
         private Long categoryId;
         private List<Long> itemIdList;
     }

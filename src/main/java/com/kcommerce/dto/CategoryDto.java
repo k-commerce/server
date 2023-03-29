@@ -1,14 +1,15 @@
 package com.kcommerce.dto;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
 public class CategoryDto {
 
     @Getter
-    @AllArgsConstructor
+    @Builder
     public static class Response {
-        private Long Id;
+
+        private Long id;
         private String name;
         private int depth;
         private Long parentId;
