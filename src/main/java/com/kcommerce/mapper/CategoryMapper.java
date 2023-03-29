@@ -5,7 +5,6 @@ import com.kcommerce.dto.CategoryDto;
 import org.mapstruct.Mapper;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public interface CategoryMapper {
@@ -15,10 +14,7 @@ public interface CategoryMapper {
                 category.getId(),
                 category.getName(),
                 category.getDepth(),
-                category.getChildList()
-                        .stream()
-                        .map(this::toDto)
-                        .collect(Collectors.toList())
+                category.getParent() != null ? category.getParent().getId() : null
         );
     }
 
