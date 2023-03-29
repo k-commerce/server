@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,16 +36,21 @@ public class OrderService {
 
     public void createOrder(OrderDto.Request orderDto, Long memberId) {
         Member member = memberRepository.getReferenceById(memberId);
-        List<Item> itemList = itemRepository.findByIdIn(orderDto.getItemIdList());
+        List<Long> itemIdList = new ArrayList<>();
+        for (ItemDto.OrderCheckedItemRequest item : orderDto.getOrderItemList()) {
+            itemIdList.add(item.getId());
+        }
+        List<Item> itemList = itemRepository.findByIdIn(itemIdList);
         Order order = orderRepository.save(orderMapper.toEntity(member, orderDto));
-        for (int i = 0; i < orderDto.getItemIdList().toArray().length; i++) {
+        for (int i = 0; i < itemIdList.toArray().length; i++) {
             Item item = itemList.get(i);
+            int quantity = orderDto.getOrderItemList().get(i).getQuantity();
             OrderItem orderItem = OrderItem.builder()
                     .item(item)
                     .order(order)
                     .status(OrderStatus.SUCCESS)
-                    .quantity(orderDto.getCountList().get(i))
-                    .orderPrice(orderDto.getTotalPriceList().get(i))
+                    .quantity(quantity)
+                    .orderPrice(itemMapper.toDto(item).getPrice() * quantity)
                     .build();
             orderItemRepository.save(orderItem);
         }

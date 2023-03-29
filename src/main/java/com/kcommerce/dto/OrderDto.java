@@ -35,11 +35,7 @@ public class OrderDto {
         @Size(max = 100, message = "상세 주소는 100자 이하로 입력해 주세요.")
         private String detailed;
 
-        private List<Long> itemIdList;
-
-        private List<Integer> countList;
-
-        private List<Integer> totalPriceList;
+        private List<ItemDto.OrderCheckedItemRequest> orderItemList;
     }
 
     @Getter

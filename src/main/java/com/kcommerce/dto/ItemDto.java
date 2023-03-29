@@ -18,6 +18,16 @@ public class ItemDto {
     }
 
     @Getter
+    @AllArgsConstructor
+    public static class OrderCheckedItemRequest {
+        private Long id;
+        private String name;
+        private int price;
+        private String description;
+        private int quantity;
+    }
+
+    @Getter
     @NoArgsConstructor
     @AllArgsConstructor
     public static class ItemSearchCondition {
