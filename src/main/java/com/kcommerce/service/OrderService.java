@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,24 +36,23 @@ public class OrderService {
     private final ItemMapper itemMapper;
 
     public void createOrder(OrderDto.Request orderDto, Long memberId) {
-        Member member = memberRepository.getReferenceById(memberId);
-        List<Long> itemIdList = new ArrayList<>();
-        for (OrderDto.OrderCheck item : orderDto.getOrderItemList()) {
-            itemIdList.add(item.getItemId());
-        }
+        Map<Long, Integer> orderCheck = orderDto.getOrderCheck();
+
+        List<Long> itemIdList = new ArrayList<>(orderCheck.keySet());
         List<Item> itemList = itemRepository.findByIdIn(itemIdList);
-        Order order = orderRepository.save(orderMapper.toEntity(member, orderDto));
-        for (int i = 0; i < itemIdList.toArray().length; i++) {
-            Item item = itemList.get(i);
-            int quantity = orderDto.getOrderItemList().get(i).getQuantity();
-            OrderItem orderItem = OrderItem.builder()
+
+        Member member = memberRepository.getReferenceById(memberId);
+        Order order = orderMapper.toEntity(member, orderDto);
+        orderRepository.save(order);
+
+        for (Item item : itemList) {
+            orderItemRepository.save(OrderItem.builder()
                     .item(item)
                     .order(order)
                     .status(OrderStatus.SUCCESS)
-                    .quantity(quantity)
-                    .orderPrice(itemMapper.toDto(item).getPrice() * quantity)
-                    .build();
-            orderItemRepository.save(orderItem);
+                    .quantity(orderCheck.get(item.getId()))
+                    .orderPrice(item.getPrice() * orderCheck.get(item.getId()))
+                    .build());
         }
     }
 
