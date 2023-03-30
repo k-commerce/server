@@ -3,7 +3,6 @@ package com.kcommerce.dto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.util.List;
 
@@ -21,7 +20,6 @@ public class ItemDto {
 
     @Getter
     @Setter
-    @ToString
     public static class ItemSearchCondition {
 
         private Long categoryId;
