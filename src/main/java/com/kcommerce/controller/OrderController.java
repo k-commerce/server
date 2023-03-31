@@ -30,9 +30,9 @@ public class OrderController {
     }
 
     @PutMapping("/api/orders/{orderId}")
-    public ResponseEntity<Void> updateOrder(@PathVariable Long orderId,
-                                            @RequestBody OrderItemDto.Request orderItemDto,
-                                            @AuthenticationPrincipal Long memberId) {
+    public ResponseEntity<Void> updateOrderItemStatus(@PathVariable Long orderId,
+                                                      @RequestBody OrderItemDto.Request orderItemDto,
+                                                      @AuthenticationPrincipal Long memberId) {
         orderService.updateOrderItemStatus(memberId, orderId, orderItemDto.getId());
         return ResponseEntity.ok().build();
     }

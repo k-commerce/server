@@ -31,11 +31,11 @@ public class Order extends BaseTimeEntity {
     private PaymentType payment;
 
     @Builder
-    public Order(Member member, Address address, PaymentType payment, String name, String phoneNumber) {
+    public Order(Member member, String name, String phoneNumber, Address address, PaymentType payment) {
         this.member = member;
-        this.address = address;
-        this.payment = payment;
         this.name = name;
         this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.payment = payment;
     }
 }
