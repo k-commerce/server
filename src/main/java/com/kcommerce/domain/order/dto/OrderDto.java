@@ -1,6 +1,6 @@
 package com.kcommerce.domain.order.dto;
 
-import com.kcommerce.domain.member.domain.Address;
+import com.kcommerce.domain.order.domain.Address;
 import com.kcommerce.domain.order.domain.PaymentType;
 import lombok.Builder;
 import lombok.Getter;

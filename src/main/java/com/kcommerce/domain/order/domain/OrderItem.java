@@ -1,6 +1,5 @@
 package com.kcommerce.domain.order.domain;
 
-import com.kcommerce.domain.item.domain.Item;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,20 +20,20 @@ public class OrderItem {
     @JoinColumn(name = "order_id")
     private Order order;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "item_id")
-    private Item item;
-
-    @Enumerated(EnumType.STRING)
-    private OrderStatus status;
+    private Long itemId;
+    private String itemName;
 
     private int quantity;
     private int orderPrice;
 
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
+
     @Builder
-    public OrderItem(Order order, Item item, OrderStatus status, int quantity, int orderPrice) {
+    public OrderItem(Order order, Long itemId, String itemName, int quantity, int orderPrice, OrderStatus status) {
         this.order = order;
-        this.item = item;
+        this.itemId = itemId;
+        this.itemName = itemName;
         this.status = status;
         this.quantity = quantity;
         this.orderPrice = orderPrice;

@@ -1,8 +1,5 @@
 package com.kcommerce.domain.order.domain;
 
-import com.kcommerce.domain.member.domain.Address;
-import com.kcommerce.domain.member.domain.BaseTimeEntity;
-import com.kcommerce.domain.member.domain.Member;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,9 +17,7 @@ public class Order extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member;
+    private Long memberId;
 
     private String name;
     private String phoneNumber;
@@ -34,8 +29,8 @@ public class Order extends BaseTimeEntity {
     private PaymentType payment;
 
     @Builder
-    public Order(Member member, String name, String phoneNumber, Address address, PaymentType payment) {
-        this.member = member;
+    public Order(Long memberId, String name, String phoneNumber, Address address, PaymentType payment) {
+        this.memberId = memberId;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.address = address;
