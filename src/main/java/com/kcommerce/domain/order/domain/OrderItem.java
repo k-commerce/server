@@ -1,15 +1,13 @@
 package com.kcommerce.domain.order.domain;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString
 public class OrderItem {
 
     @Id
@@ -21,9 +19,11 @@ public class OrderItem {
     private Order order;
 
     private Long itemId;
+
     private String itemName;
 
     private int quantity;
+
     private int orderPrice;
 
     @Enumerated(EnumType.STRING)
@@ -34,9 +34,9 @@ public class OrderItem {
         this.order = order;
         this.itemId = itemId;
         this.itemName = itemName;
-        this.status = status;
         this.quantity = quantity;
         this.orderPrice = orderPrice;
+        this.status = status;
     }
 
     public void updateStatus(OrderStatus status) {

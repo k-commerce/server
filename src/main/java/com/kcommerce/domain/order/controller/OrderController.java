@@ -9,6 +9,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,10 +24,10 @@ public class OrderController {
         return ResponseEntity.ok().build();
     }
 
-//    @GetMapping("/api/orders")
-//    public ResponseEntity<List<OrderItemDto.Response>> getOrderHistory(@AuthenticationPrincipal Long memberId) {
-//        return ResponseEntity.ok(orderService.getOrderHistory(memberId));
-//    }
+    @GetMapping("/api/orders")
+    public ResponseEntity<List<OrderDto.Response>> getOrderHistory(@AuthenticationPrincipal Long memberId) {
+        return ResponseEntity.ok(orderService.getOrderHistory(memberId));
+    }
 
     @PutMapping("/api/orders/{orderId}")
     public ResponseEntity<Void> updateOrderItemStatus(@PathVariable Long orderId,

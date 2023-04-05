@@ -11,10 +11,11 @@ public class OrderItemDto {
     public static class Response {
 
         private Long id;
-        private OrderDto.Response order;
-        private OrderStatus status;
+        private Long itemId;
+        private String itemName;
         private int quantity;
         private int orderPrice;
+        private OrderStatus status;
     }
 
     @Getter

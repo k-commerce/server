@@ -1,9 +1,6 @@
 package com.kcommerce.domain.order.domain;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -11,6 +8,7 @@ import javax.persistence.*;
 @Table(name = "orders")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString
 public class Order extends BaseTimeEntity {
 
     @Id
@@ -20,6 +18,7 @@ public class Order extends BaseTimeEntity {
     private Long memberId;
 
     private String name;
+
     private String phoneNumber;
 
     @Embedded

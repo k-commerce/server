@@ -6,6 +6,7 @@ import com.kcommerce.domain.order.domain.Order;
 import com.kcommerce.domain.order.domain.OrderItem;
 import com.kcommerce.domain.order.domain.OrderStatus;
 import com.kcommerce.domain.order.dto.OrderDto;
+import com.kcommerce.domain.order.dto.OrderItemDto;
 import com.kcommerce.domain.order.mapper.OrderItemMapper;
 import com.kcommerce.domain.order.mapper.OrderMapper;
 import com.kcommerce.domain.order.repository.OrderItemRepository;
@@ -19,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -54,18 +56,21 @@ public class OrderService {
         }
     }
 
-//    @Transactional(readOnly = true)
-//    public List<OrderItemDto.Response> getOrderHistory(Long memberId) {
-//        List<OrderItem> orderItemList = orderItemRepository.findOrderItemByMemberId(memberId);
-//        return orderItemList
-//                .stream()
-//                .map(orderItem -> {
-//                    OrderDto.Response orderDto = orderMapper.toDto(orderItem.getOrder());
-//                    ItemDto.Response itemDto = itemMapper.toDto(orderItem.getItem());
-//                    return orderItemMapper.toDto(orderItem, orderDto, itemDto);
-//                })
-//                .collect(Collectors.toList());
-//    }
+    @Transactional(readOnly = true)
+    public List<OrderDto.Response> getOrderHistory(Long memberId) {
+        List<OrderItem> orderItemList = orderItemRepository.findOrderItemByMemberId(memberId);
+
+        Map<Order, List<OrderItem>> orderMap = orderItemList.stream()
+                .collect(Collectors.groupingBy(OrderItem::getOrder));
+
+        return orderMap.keySet()
+                .stream()
+                .map(order -> {
+                    List<OrderItem> entityList = orderMap.get(order);
+                    List<OrderItemDto.Response> dtoList = orderItemMapper.toDtoList(entityList);
+                    return orderMapper.toDto(order, dtoList);
+                }).toList();
+    }
 
     public void updateOrderItemStatus(Long memberId, Long orderId, Long orderItemId) {
         checkMember(memberId, orderId);

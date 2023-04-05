@@ -9,6 +9,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 public class OrderDto {
@@ -23,11 +24,11 @@ public class OrderDto {
         private Address address;
         private PaymentType payment;
         private LocalDateTime createdDate;
+        private List<OrderItemDto.Response> orderItemList;
     }
 
     @Getter
     public static class Request {
-
 
         @Pattern(regexp = "^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]{1,9}$", message = "이름은 1~9자의 영문, 숫자, 한글만 사용 가능합니다.")
         private String name;

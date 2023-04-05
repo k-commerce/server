@@ -1,18 +1,15 @@
 package com.kcommerce.domain.order.mapper;
 
 import com.kcommerce.domain.order.domain.OrderItem;
-import com.kcommerce.domain.order.dto.OrderDto;
 import com.kcommerce.domain.order.dto.OrderItemDto;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface OrderItemMapper {
 
-    @Mapping(target = "id", source = "orderItem.id")
-    @Mapping(target = "order", source = "orderDto")
-    @Mapping(target = "status", source = "orderItem.status")
-    @Mapping(target = "quantity", source = "orderItem.quantity")
-    @Mapping(target = "orderPrice", source = "orderItem.orderPrice")
-    OrderItemDto.Response toDto(OrderItem orderItem, OrderDto.Response orderDto);
+    OrderItemDto.Response toDto(OrderItem orderItem);
+
+    List<OrderItemDto.Response> toDtoList(List<OrderItem> orderItem);
 }
