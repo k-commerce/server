@@ -16,7 +16,7 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping("/api/categories")
-    public ResponseEntity<List<CategoryDto.Response>> getCategoryList() {
+    public ResponseEntity<List<CategoryDto>> getCategoryList() {
         return ResponseEntity.ok(categoryService.getCategoryList());
     }
 }

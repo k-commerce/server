@@ -6,22 +6,21 @@ import lombok.Setter;
 
 import java.util.List;
 
+@Getter
+@Builder
 public class ItemDto {
 
-    @Getter
-    @Builder
-    public static class Response {
-
-        private Long id;
-        private String name;
-        private int price;
-        private String description;
-    }
+    private Long id;
+    private String name;
+    private int price;
+    private String description;
 
     @Getter
     @Setter
     public static class ItemSearchCondition {
 
+        private Long cursorId;
+        private String name;
         private Long categoryId;
         private List<Long> itemIdList;
     }

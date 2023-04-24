@@ -30,4 +30,8 @@ public class Member extends BaseTimeEntity {
         this.name = name;
         this.phoneNumber = phoneNumber;
     }
+
+    public void changePassword(String password) {
+        this.password = password;
+    }
 }

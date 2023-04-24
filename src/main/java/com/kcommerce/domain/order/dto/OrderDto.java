@@ -12,20 +12,17 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
+@Getter
+@Builder
 public class OrderDto {
 
-    @Getter
-    @Builder
-    public static class Response {
-
-        private Long id;
-        private String name;
-        private String phoneNumber;
-        private Address address;
-        private PaymentType payment;
-        private LocalDateTime createdDate;
-        private List<OrderItemDto.Response> orderItemList;
-    }
+    private Long id;
+    private String name;
+    private String phoneNumber;
+    private Address address;
+    private PaymentType payment;
+    private LocalDateTime createdDate;
+    private List<OrderItemDto> orderItemList;
 
     @Getter
     public static class Request {

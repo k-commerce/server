@@ -5,7 +5,7 @@ import com.kcommerce.domain.item.dto.ItemDto;
 
 import java.util.List;
 
-public interface CategoryItemRepositoryCustom {
+public interface ItemRepositoryCustom {
 
     List<Item> searchItem(ItemDto.ItemSearchCondition itemSearchCondition);
 }

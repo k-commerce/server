@@ -11,13 +11,6 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface OrderMapper {
 
-    @Mapping(target = "name", source = "orderDto.name")
-    @Mapping(target = "phoneNumber", source = "orderDto.phoneNumber")
-    @Mapping(target = "address.postcode", source = "orderDto.postcode")
-    @Mapping(target = "address.selected", source = "orderDto.selected")
-    @Mapping(target = "address.detailed", source = "orderDto.detailed")
-    Order toEntity(Long memberId, OrderDto.Request orderDto);
-
     @Mapping(target = "id", source = "order.id")
     @Mapping(target = "name", source = "order.name")
     @Mapping(target = "phoneNumber", source = "order.phoneNumber")
@@ -25,5 +18,12 @@ public interface OrderMapper {
     @Mapping(target = "payment", source = "order.payment")
     @Mapping(target = "createdDate", source = "order.createdDate")
     @Mapping(target = "orderItemList", source = "orderItemDtoList")
-    OrderDto.Response toDto(Order order, List<OrderItemDto.Response> orderItemDtoList);
+    OrderDto toDto(Order order, List<OrderItemDto> orderItemDtoList);
+
+    @Mapping(target = "name", source = "orderDto.name")
+    @Mapping(target = "phoneNumber", source = "orderDto.phoneNumber")
+    @Mapping(target = "address.postcode", source = "orderDto.postcode")
+    @Mapping(target = "address.selected", source = "orderDto.selected")
+    @Mapping(target = "address.detailed", source = "orderDto.detailed")
+    Order toEntity(Long memberId, OrderDto.Request orderDto);
 }

@@ -9,8 +9,8 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface CategoryMapper {
 
-    default CategoryDto.Response toDto(Category category) {
-        return CategoryDto.Response.builder()
+    default CategoryDto toDto(Category category) {
+        return CategoryDto.builder()
                 .id(category.getId())
                 .name(category.getName())
                 .depth(category.getDepth())
@@ -18,5 +18,5 @@ public interface CategoryMapper {
                 .build();
     }
 
-    List<CategoryDto.Response> toDtoList(List<Category> categoryList);
+    List<CategoryDto> toDtoList(List<Category> categoryList);
 }

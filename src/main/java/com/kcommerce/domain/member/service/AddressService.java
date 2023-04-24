@@ -24,9 +24,9 @@ public class AddressService {
     private final AddressRepository addressRepository;
     private final AddressMapper addressMapper;
 
-    public void createAddress(AddressDto addressDto, Long memberId) {
+    public void createAddress(AddressDto.Request request, Long memberId) {
         Member member = memberRepository.getReferenceById(memberId);
-        AddressEntity addressEntity = addressMapper.toEntity(addressDto, member);
+        AddressEntity addressEntity = addressMapper.toEntity(request, member);
         addressRepository.save(addressEntity);
     }
 
@@ -37,12 +37,12 @@ public class AddressService {
         return addressMapper.toDtoList(addressEntityList);
     }
 
-    public void updateAddress(Long id, AddressDto addressDto, Long memberId) {
+    public void updateAddress(Long id, AddressDto.Request request, Long memberId) {
         Member member = memberRepository.getReferenceById(memberId);
         AddressEntity addressEntity = addressRepository.findByIdAndMember(id, member)
                 .orElseThrow(() -> new BusinessException(ErrorCode.ADDRESS_NOT_FOUND));
-        Address address = addressMapper.toVo(addressDto);
-        addressEntity.update(addressDto.getName(), address);
+        Address address = addressMapper.toVo(request);
+        addressEntity.update(request.getName(), address);
     }
 
     public void deleteAddress(Long id, Long memberId) {

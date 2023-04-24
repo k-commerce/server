@@ -8,10 +8,10 @@ import lombok.RequiredArgsConstructor;
 public enum ErrorCode {
 
     METHOD_ARGUMENT_NOT_VALID(400, "METHOD_ARGUMENT_NOT_VALID", "유효성 검증에 실패하였습니다."),
-    BAD_CREDENTIALS(400, "BAD_CREDENTIALS", "로그인에 실패하였습니다."),
     INTERNAL_SERVER_ERROR(500, "INTERNAL_SERVER_ERROR", "서버에 문제가 발생하였습니다."),
 
     // Member
+    BAD_CREDENTIALS(400, "BAD_CREDENTIALS", "로그인에 실패하였습니다."),
     USERNAME_DUPLICATE(400, "USERNAME_DUPLICATE", "이미 존재하는 아이디입니다."),
 
     // Address

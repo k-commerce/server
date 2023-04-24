@@ -18,22 +18,22 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping("/api/orders")
-    public ResponseEntity<Void> createOrder(@RequestBody @Valid OrderDto.Request orderDto,
+    public ResponseEntity<Void> createOrder(@RequestBody @Valid OrderDto.Request request,
                                             @AuthenticationPrincipal Long memberId) {
-        orderService.createOrder(orderDto, memberId);
+        orderService.createOrder(request, memberId);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/api/orders")
-    public ResponseEntity<List<OrderDto.Response>> getOrderHistory(@AuthenticationPrincipal Long memberId) {
+    public ResponseEntity<List<OrderDto>> getOrderHistory(@AuthenticationPrincipal Long memberId) {
         return ResponseEntity.ok(orderService.getOrderHistory(memberId));
     }
 
     @PutMapping("/api/orders/{orderId}")
     public ResponseEntity<Void> updateOrderItemStatus(@PathVariable Long orderId,
-                                                      @RequestBody OrderItemDto.Request orderItemDto,
+                                                      @RequestBody OrderItemDto.Request request,
                                                       @AuthenticationPrincipal Long memberId) {
-        orderService.updateOrderItemStatus(memberId, orderId, orderItemDto.getId());
+        orderService.updateOrderItemStatus(memberId, orderId, request.getId());
         return ResponseEntity.ok().build();
     }
 }

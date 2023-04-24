@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ItemMapper {
 
-    ItemDto.Response toDto(Item item);
+    ItemDto toDto(Item item);
 
-    List<ItemDto.Response> toDtoList(List<Item> itemList);
+    List<ItemDto> toDtoList(List<Item> itemList);
 }

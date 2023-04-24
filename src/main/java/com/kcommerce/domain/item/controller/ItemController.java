@@ -18,12 +18,12 @@ public class ItemController {
     private final ItemService itemService;
 
     @GetMapping("/api/items")
-    public ResponseEntity<List<ItemDto.Response>> getItemList(@ModelAttribute ItemDto.ItemSearchCondition itemSearchCondition) {
+    public ResponseEntity<List<ItemDto>> getItemList(@ModelAttribute ItemDto.ItemSearchCondition itemSearchCondition) {
         return ResponseEntity.ok(itemService.getItemList(itemSearchCondition));
     }
 
     @GetMapping("/api/items/{itemId}")
-    public ResponseEntity<ItemDto.Response> getItem(@PathVariable Long itemId) {
+    public ResponseEntity<ItemDto> getItem(@PathVariable Long itemId) {
         return ResponseEntity.ok(itemService.getItem(itemId));
     }
 }
