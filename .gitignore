@@ -37,5 +37,6 @@ out/
 .vscode/
 
 ### 추가 ###
+src/main/resources/application-dev.yml
 src/main/resources/application-local.yml
 src/main/generated/
