@@ -1,8 +1,10 @@
 package com.kcommerce.domain.member.dto;
 
 import com.kcommerce.domain.member.domain.Member;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Pattern;
 import java.util.Collections;
@@ -27,7 +29,10 @@ public class MemberDto {
         }
     }
 
+    @NoArgsConstructor
+    @AllArgsConstructor
     @Getter
+    @Builder
     public static class LoginRequest {
 
         @Pattern(regexp = "^[a-z]{1,9}$", message = "")
@@ -37,7 +42,10 @@ public class MemberDto {
         private String password;
     }
 
+    @NoArgsConstructor
+    @AllArgsConstructor
     @Getter
+    @Builder
     public static class JoinRequest {
 
         @Pattern(regexp = "^[a-z]{1,9}$", message = "아이디는 1~9자의 영문 소문자만 사용 가능합니다.")

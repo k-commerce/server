@@ -9,5 +9,11 @@ public interface MemberMapper {
 
     MemberDto toDto(Member member);
 
+    Member toEntity(MemberDto.LoginRequest request);
+
     Member toEntity(MemberDto.JoinRequest request);
+
+    MemberDto.LoginRequest toLoginRequest(Member member);
+
+    MemberDto.JoinRequest toJoinRequest(Member member);
 }
