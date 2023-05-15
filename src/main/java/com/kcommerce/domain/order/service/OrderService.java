@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -49,6 +50,7 @@ public class OrderService {
                     .itemId(item.getId())
                     .order(order)
                     .itemName(item.getName())
+                    .itemImageUrl(item.getImageUrl())
                     .quantity(orderCheck.get(item.getId()))
                     .orderPrice(item.getPrice() * orderCheck.get(item.getId()))
                     .status(OrderStatus.SUCCESS)
@@ -69,7 +71,9 @@ public class OrderService {
                     List<OrderItem> entityList = orderMap.get(order);
                     List<OrderItemDto> dtoList = orderItemMapper.toDtoList(entityList);
                     return orderMapper.toDto(order, dtoList);
-                }).toList();
+                })
+                .sorted(Comparator.comparing(OrderDto::getId).reversed())
+                .toList();
     }
 
     public void updateOrderItemStatus(Long memberId, Long orderId, Long orderItemId) {

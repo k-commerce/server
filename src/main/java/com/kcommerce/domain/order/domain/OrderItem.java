@@ -22,6 +22,8 @@ public class OrderItem {
 
     private String itemName;
 
+    private String itemImageUrl;
+
     private int quantity;
 
     private int orderPrice;
@@ -30,10 +32,11 @@ public class OrderItem {
     private OrderStatus status;
 
     @Builder
-    public OrderItem(Order order, Long itemId, String itemName, int quantity, int orderPrice, OrderStatus status) {
+    public OrderItem(Order order, Long itemId, String itemName, String itemImageUrl, int quantity, int orderPrice, OrderStatus status) {
         this.order = order;
         this.itemId = itemId;
         this.itemName = itemName;
+        this.itemImageUrl = itemImageUrl;
         this.quantity = quantity;
         this.orderPrice = orderPrice;
         this.status = status;

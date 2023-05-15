@@ -20,12 +20,14 @@ public class Item {
     private Long id;
 
     private String name;
+    private String imageUrl;
     private int price;
     private String description;
 
     @Builder
-    public Item(String name, int price, String description) {
+    public Item(String name, String imageUrl, int price, String description) {
         this.name = name;
+        this.imageUrl = imageUrl;
         this.price = price;
         this.description = description;
     }

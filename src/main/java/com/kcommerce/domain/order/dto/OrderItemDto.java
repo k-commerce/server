@@ -11,6 +11,7 @@ public class OrderItemDto {
     private Long id;
     private Long itemId;
     private String itemName;
+    private String itemImageUrl;
     private int quantity;
     private int orderPrice;
     private OrderStatus status;
